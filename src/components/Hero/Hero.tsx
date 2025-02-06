@@ -6,6 +6,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 // import Navbar from "../components/Navbar";
 import { useState } from "react";
+import Navbar from "../Navbar";
 
 
 
@@ -92,48 +93,97 @@ const Hero = () => {
       transition={{duration: 0.5}}
       className="bg-brandDark text-white"
     >
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="container grid grid-cols-1 md:grid-cols-2 min-h-[650px]">
         {/* ----Headphone Info---- */}
-        <div className="flex xlex-col justify-center py-14 d:py-0 xl:max-w-[500p">
-          <div>
+        <div className="flex flex-col justify-center py-14 d:py-0 xl:max-w-[500px] order-2 md:order-1">
+          <div className="space-y-5 text-center md:text-left" >
             <AnimatePresence mode="wait">
-              <motion.h1>
+              <motion.h1
+                key={activeData.id}
+                variants={SlideRight(0.2)}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                className="text-3xl lg:text-6xl xl:text-7xl font-bold font-handwriting text-shadow"
+              >
                 {activeData.title}
               </motion.h1>
             </AnimatePresence>
 
             <AnimatePresence mode="wait">
-              <motion.p>
+              <motion.p
+                key={activeData.id}
+                variants={SlideRight(0.4)}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                className="text-sm leading-loose text-white/80"
+              >
                 {activeData.subtitle}
               </motion.p>
             </AnimatePresence>
 
-            <AnimatePresence>
-              <motion.button>
+            <AnimatePresence mode="wait">
+              <motion.button
+                key={activeData.id}
+                variants={SlideRight(0.6)}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                style={{color: activeData.bgColor}}
+                className="px-4 py-2 bg-white inline-block font-normal rounded-sm cursor-pointer hover:bg-white/95 hover:scale-105 duration-300"
+              >
                 Order Now
               </motion.button>
             </AnimatePresence>
 
             {/* ----Headphone List Separator---- */}
 
-            <motion.div>
-              <div></div>
-              <p>Top Recommendation</p>
-              <div></div>
+            <motion.div
+              initial={{ opacity:0}}
+              animate={{ opacity:1}}
+              transition={{ duration:0.8, delay:0.2, ease:easeInOut }}
+              className="flex items-center justify-center md:justify-start gap-4 !md:mt-24 !mb-10"
+            >
+              <div className="w-20 h-[1px] bg-white"></div>
+              <p className="uppercase text-sm">Top Recommendation</p>
+              <div className="w-20 h-[1px] bg-white"></div>
             </motion.div>
 
             {/* ----Headphone List Switcher---- */}
-            <motion.div>
-              {headphoneData.map((data) => (
-                <div>
-                  <div>
-                    <img src="" alt="" />
+            <motion.div
+              initial={{ opacity:0}}
+              animate={{ opacity:1}}
+              transition={{ duration:0.8, delay:0.2, ease:easeInOut }}
+              className="grid grid-cols-3 gap-10"
+            >
+              {headphoneData.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => handleActiveData(item)}
+                  className="cursor-pointer space-y-3 hover:scale-105 transition-all"
+                >
+                  <div className="flex justify-center">
+                    <img
+                      src={item.image}
+                      alt={`lata de ${item.title}`} 
+                      className={`w-[80px] img-shadow
+                      ${activeData.image === item.image 
+                        ? "opacity-100 scale-110" 
+                        : "opacity-50"}  
+                      `}
+                    />
                   </div>
-                  <div>
-                    <p></p>
-                    <p></p>
-                  </div>
+                  <div className="!mt-6 space-y-1 text-center">
+                          <p className="text-base line-through opacity-50">
+                            {item.price}
+                          </p>
+                          <p className="text-xl font-bold">{item.price}</p>
+                          {/* <p className="text-xs font-normal text-nowrap">
+                            {item.modal}
+                          </p> */}
+                        </div>
                 </div>
               ))}
             </motion.div>
