@@ -15,6 +15,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="space-y-6"
+            viewport={{ once: true }}
           >
             <img src={Logo} alt="" className="max-w-[100px] invert" />
             <div>
@@ -34,6 +35,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="space-y-6"
+            viewport={{ once: true }}
           >
             <h1 className="text-3xl font-bold">Quick Links</h1>
             <div className="grid grid-cols-2 gap-3">
@@ -62,6 +64,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="space-y-6"
+            viewport={{ once: true }}
           >
             <h1 className="text-3xl font-bold">Follow Us</h1>
             <div className="flex items-center gap-3">
